@@ -61,6 +61,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Call Log" />
+
+        <Button
+            android:id="@+id/btn_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Photo" />
     </LinearLayout>
 
     <LinearLayout
@@ -69,17 +76,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/btn_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Camera" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/btn_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Alarm" />
     </LinearLayout>
 </LinearLayout>

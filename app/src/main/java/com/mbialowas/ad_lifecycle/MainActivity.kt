@@ -1,18 +1,26 @@
 package com.mbialowas.ad_lifecycle
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.AlarmClock
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+    val CALL_PHONE_REQUEST_CODE = 1
     private val TAG = "MainActivity"
+
+    private val calledNumbers = mutableListOf<String>() // list tracking all phone numbers
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +68,72 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        initializeViews()
+
     }
+
+    private fun initializeViews() {
+        // register our controls
+        val btn_phone = findViewById<Button>(R.id.btn_phone)
+        val btn_call_log = findViewById<Button>(R.id.btn_call_log)
+        val btn_photo = findViewById<Button>(R.id.btn_photo)
+        val btn_camera = findViewById<Button>(R.id.btn_camera)
+        val btn_alarm = findViewById<Button>(R.id.btn_alarm)
+
+        val phone_number:String = "+1234567890"
+
+        btn_phone.setOnClickListener{ makeACall(phone_number) }
+
+        btn_call_log.setOnClickListener{
+            val intent = Intent(this,CallLogActivity::class.java)
+            intent.putStringArrayListExtra("calledNumbers", ArrayList(calledNumbers))
+            startActivity(intent)
+        }
+
+        btn_photo.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("content://media/internal/images/media")
+            startActivity(intent)
+        }
+        btn_camera.setOnClickListener{
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivity(intent)
+        }
+        btn_alarm.setOnClickListener{
+            val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+            startActivity(intent)
+        }
+
+
+
+    }
+    private fun makeACall(phone_number:String) {
+        calledNumbers.add("+14319997878")
+        calledNumbers.add("+14319997970")
+        calledNumbers.add("+14319997971")
+        calledNumbers.add("+12042222222")
+        calledNumbers.add("+12042222223")
+        calledNumbers.add(phone_number)
+
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.CALL_PHONE
+        ) == PackageManager.PERMISSION_GRANTED) {
+            // permission is granted, proceed to make phone call
+            val intent = Intent(Intent.ACTION_CALL).apply {
+                data = Uri.parse("tel:$phone_number")
+            }
+            startActivity(intent)
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.CALL_PHONE),
+                CALL_PHONE_REQUEST_CODE
+            )
+        }
+    }
+
+
     override fun onStart(){
         super.onStart()
         Log.i(TAG, "onStart: got called here.")
