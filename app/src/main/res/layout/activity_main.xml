@@ -12,7 +12,6 @@
         android:id="@+id/btn_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:backgroundTint="#F44336"
         android:text="Linear Layout" />
 
@@ -20,7 +19,6 @@
         android:id="@+id/btn_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:backgroundTint="#2196F3"
         android:text="Vertical Layout" />
 
@@ -28,7 +26,6 @@
         android:id="@+id/btn_relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:backgroundTint="#00BCD4"
         android:text="Relative Layout" />
 
@@ -36,7 +33,6 @@
         android:id="@+id/btn_constraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:backgroundTint="#FFC107"
         android:text="Constraint Layout" />
 
@@ -44,7 +40,6 @@
         android:id="@+id/btn_spec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:backgroundTint="#4CAF50"
         android:text="Web Browser Launcher" />
 </LinearLayout>
